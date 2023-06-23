@@ -44,7 +44,7 @@
 .tabela {
   background-color: aliceblue;
   color: black;
-  margin: 20px;
+  margin: 40px;
   border-radius: 4px;
 }
 
@@ -79,7 +79,7 @@
   text-align: center;
   border-radius: 4px;
   height: 30px;
-  width: 40px;
+  width: 60px;
   font-size: 16px;
 }
 
@@ -89,7 +89,8 @@
 }
 
 th {
-  border: 1px solid black;
+  border: 1px solid;
+  border-radius: 2px;
 }
 
 label {
@@ -100,4 +101,27 @@ label {
 #textPDesconto {
   color: black;
   /* odsodsoks */
+}
+
+span {
+  background-color: #cacfd6;
+  font-weight: bold;
+}
+
+.body {
+  background-color: rgba(173, 170, 166, 0.432);
+  border-radius: 4px;
+  margin: 20px;
+  color: black;
+  padding: 3px;
+}
+
+#textVendor {
+  color: black;
+  font-weight: bold;
+}
+
+#valorVendor {
+  background-color: green;
+  font-weight: bold;
 }

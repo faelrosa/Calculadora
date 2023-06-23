@@ -11,6 +11,7 @@ function App() {
   const [parcela, setParcela] = useState(0);
   const pedidoDesconto = pedido - pedido * (desconto / 100);
   const [calculoParcela, setCalculoParcela] = useState<any[]>([]);
+  const [valorTotalVendor, setValorTotalVendor] = useState(0);
 
   function calcular() {
     let pedidoDesconto = pedido - pedido * (desconto / 100);
@@ -19,6 +20,7 @@ function App() {
 
     let dias = 30;
     let resultadoParcela: any[] = [];
+    let valorVendor = 0;
     for (let index = 0; index < parcela; index++) {
       let qtdrRealdaparcela = index + 1;
       let taxa = (taxaPadrao / dias) * (dias * qtdrRealdaparcela);
@@ -34,6 +36,7 @@ function App() {
         valorTotal = valorTotal + calculoIofdia;
       }
       valorTotal = Number(valorTotal.toFixed(2));
+      valorVendor = valorTotal + valorVendor;
       resultadoParcela.push({
         qtdrRealdaparcela,
         taxa,
@@ -48,11 +51,12 @@ function App() {
     }
     console.log(resultadoParcela);
     setCalculoParcela(resultadoParcela);
+    setValorTotalVendor(valorVendor);
   }
 
   return (
     <>
-      <p id="body">
+      <p className="body">
         <label id="textPedido">Valor do pedido</label>
         <input
           min={0}
@@ -94,7 +98,13 @@ function App() {
           />
         </p>
       </p>
-      <p id="textPDesconto">VALOR COM DESCONTO R${pedidoDesconto}</p>
+      <p className="body">
+        VALOR COM DESCONTO{" "}
+        <span>
+          R$
+          {pedidoDesconto}
+        </span>
+      </p>
       <button onClick={calcular} type="button" id="button">
         Calcular
       </button>
@@ -104,43 +114,50 @@ function App() {
           if (indice === 0) {
             return (
               <table className="tabela">
+                {/* <p className="body2" id="textVendor">
+                  VALOR VENDOR{" "}
+                  <span id="valorVendor">
+                    R$
+                    {}
+                  </span>
+                </p> */}
                 <tr>
                   <th>
                     Parcela {item.qtdrRealdaparcela}/{parcela}
                   </th>
-                  <th>Valor da Parcela</th>
-                  <th>{item.diasdaParcela}</th>
+                  {/* <th>Valor da Parcela</th> */}
+                  <th>{item.diasdaParcela} Dias</th>
                   <th>{item.taxa.toFixed(2)}%</th>
                 </tr>
                 <tr>
-                  <th>Valor Nominal</th>
+                  {/* <th>Valor Nominal</th>
                   <th>R$ {item.parcelasemdesconto}</th>
                   <th></th>
-                  <th></th>
+                  <th></th> */}
                 </tr>
                 <tr>
                   <th>Juros</th>
                   <th> R$ {item.juros.toFixed(2)}</th>
-                  <th>{item.taxa.toFixed(2)}%</th>
-                  <th></th>
+                  {/* <th>{item.taxa.toFixed(2)}%</th>
+                  <th></th> */}
                 </tr>
                 <tr>
                   <th>IOF</th>
                   <th> R$ {item.calculoIofdia.toFixed(2)}</th>
-                  <th>% de iof</th>
-                  <th></th>
+                  {/* <th>% de iof</th>
+                  <th></th> */}
                 </tr>
                 <tr>
                   <th>IOF ao dia</th>
                   <th> R$ {item.calculoIof.toFixed(2)}</th>
-                  <th> % DE Iof ao dia</th>
-                  <th></th>
+                  {/* <th> % DE Iof ao dia</th>
+                  <th></th> */}
                 </tr>
-                <tr>
+                <tr className="colunaTotal">
                   <th>Total</th>
                   <th> R$ {item.valorTotal}</th>
-                  <th></th>
-                  <th></th>
+                  {/* <th></th>
+                  <th></th> */}
                 </tr>
               </table>
             );
@@ -151,19 +168,23 @@ function App() {
                   <th>
                     Parcela {item.qtdrRealdaparcela}/{parcela}
                   </th>
-                  <th>Valor da Parcela</th>
+                  {/* <th>Valor da Parcela</th> */}
                   <th>{item.diasdaParcela} Dias</th>
                   <th>{item.taxa.toFixed(2)}%</th>
                 </tr>
                 <tr>
-                  <th>Valor Nominal</th>
-                  <th>R$ {item.parcelasemdesconto}</th>
+                  {/* <th>Valor Nominal</th>
+                  <th>R$ {item.parcelasemdesconto}</th> */}
                 </tr>
                 <tr>
                   <th>Juros</th>
                   <th> R$ {item.juros.toFixed(2)}</th>
                 </tr>
                 <tr>
+                  <th>IOF ao dia</th>
+                  <th> R$ {item.calculoIof.toFixed(2)}</th>
+                </tr>
+                <tr className="colunaTotal">
                   <th>Total</th>
                   <th> R$ {item.valorTotal}</th>
                 </tr>
@@ -171,6 +192,12 @@ function App() {
             );
           }
         })}
+      <p className="body">
+        {valorTotalVendor.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </p>
     </>
   );
 }
