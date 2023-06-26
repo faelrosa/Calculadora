@@ -12,24 +12,25 @@ function App() {
   const pedidoDesconto = pedido - pedido * (desconto / 100);
   const [calculoParcela, setCalculoParcela] = useState<any[]>([]);
   const [valorTotalVendor, setValorTotalVendor] = useState(0);
+  const [prazoInicio, setPrazoInicio] = useState(0);
 
   function calcular() {
     let pedidoDesconto = pedido - pedido * (desconto / 100);
     let valorDaParcela = pedidoDesconto / parcela;
     let calculoIofdia = (iofDia * pedidoDesconto) / 100;
 
-    let dias = 30;
+    let diasMes = 30;
     let resultadoParcela: any[] = [];
     let valorVendor = 0;
     for (let index = 0; index < parcela; index++) {
+      let dias = prazoInicio + diasMes * index;
       let qtdrRealdaparcela = index + 1;
-      let taxa = (taxaPadrao / dias) * (dias * qtdrRealdaparcela);
+      let taxa = (taxaPadrao / diasMes) * dias;
       taxa = Number(taxa.toFixed(2));
       let juros = valorDaParcela * (taxa / 100);
       juros = Number(juros.toFixed(2));
       let calculoParcela = valorDaParcela + valorDaParcela * (taxa / 100);
-      let calculoIof =
-        (valorDaParcela * iof * (dias * qtdrRealdaparcela)) / 100;
+      let calculoIof = (valorDaParcela * iof * dias) / 100;
       calculoIof = Number(calculoIof.toFixed(2));
       let valorTotal = calculoParcela + calculoIof;
       if (Number(qtdrRealdaparcela) === 1) {
@@ -46,7 +47,7 @@ function App() {
         valorTotal,
         calculoIofdia,
         juros,
-        diasdaParcela: dias * qtdrRealdaparcela,
+        diasdaParcela: dias,
       });
     }
     console.log(resultadoParcela);
@@ -82,7 +83,18 @@ function App() {
             <option value="2">2 Parcelas</option>
             <option value="3">3 Parcelas</option>
             <option value="4">4 Parcelas</option>
-            <option value="5">5 Parcelas</option>
+            {prazoInicio === 30 && <option value="5">5 Parcelas</option>}
+          </select>
+        </p>
+        <p>
+          <label>Prazo Inicio</label>
+          <select
+            onChange={(e) => {
+              setPrazoInicio(Number(e.target.value));
+            }}
+          >
+            <option value="30">30 Dias</option>
+            <option value="60">60 Dias</option>
           </select>
         </p>
         <p>
