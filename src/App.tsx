@@ -145,7 +145,7 @@ function App() {
                   {/* <th>Valor Nominal</th>
                   <th>R$ {item.parcelasemdesconto}</th>
                   <th></th>
-                  <th></th> */}
+                  <th>x</th> */}
                 </tr>
                 <tr>
                   <th>Juros</th>
