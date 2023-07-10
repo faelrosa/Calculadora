@@ -204,12 +204,14 @@ function App() {
             );
           }
         })}
-      <p className="body">
-        {valorTotalVendor.toLocaleString("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        })}
-      </p>
+      {valorTotalVendor && (
+        <p className="body">
+          {valorTotalVendor.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </p>
+      )}
     </>
   );
 }
