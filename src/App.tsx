@@ -12,7 +12,7 @@ function App() {
   const pedidoDesconto = pedido - pedido * (desconto / 100);
   const [calculoParcela, setCalculoParcela] = useState<any[]>([]);
   const [valorTotalVendor, setValorTotalVendor] = useState(0);
-  const [prazoInicio, setPrazoInicio] = useState(0);
+  const [prazoInicio, setPrazoInicio] = useState(30);
 
   function calcular() {
     let pedidoDesconto = pedido - pedido * (desconto / 100);
