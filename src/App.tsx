@@ -89,6 +89,7 @@ function App() {
         <p>
           <label>Prazo Inicio</label>
           <select
+            id="diasinicioselect"
             onChange={(e) => {
               setPrazoInicio(Number(e.target.value));
             }}

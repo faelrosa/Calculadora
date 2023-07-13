@@ -125,3 +125,10 @@ span {
   background-color: green;
   font-weight: bold;
 }
+
+#diasinicioselect {
+  background-color: #cacfd6;
+  color: black;
+  height: 30px;
+  width: 70px;
+}
